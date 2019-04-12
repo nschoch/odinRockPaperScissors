@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+    <title>Rock, Paper, Scissors (The Odin Project)</title>
+    <script>
+        function computerPlay() {
+            let result = Math.random() * 100;
+            if (result < 33) {
+                return 'rock';
+            }
+            else if (result < 66) {
+                return 'paper';
+            }
+            else {
+                return 'scissors';
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            finalPlayerSelection = playerSelection.toLowerCase();
+            console.log(`You selected ${finalPlayerSelection}.`);
+            console.log(`The computer selected ${computerSelection}.`);
+            switch(finalPlayerSelection) {
+                case 'rock':
+                    switch(computerSelection) {
+                        case 'rock':
+                            return('Tie!');
+                            break;
+                        case 'paper':
+                            return('You lose!');
+                            break;
+                        case 'scissors':
+                            return('You win!');
+                            break;
+                        default:
+                            return('something went wrong!');
+                            break;
+                    }
+                    break;
+                case 'paper':
+                    switch(computerSelection) {
+                        case 'rock':
+                            return('You win!');
+                            break;
+                        case 'paper':
+                            return('Tie!');
+                            break;
+                        case 'scissors':
+                            return('You lose!');
+                            break;
+                        default:
+                            return('something went wrong!');
+                            break;
+                    }
+                    break;
+                case 'scissors':
+                    switch(computerSelection) {
+                            case 'rock':
+                                return('You lose!');
+                                break;
+                            case 'paper':
+                                return('You win!');
+                                break;
+                            case 'scissors':
+                                return('Tie!');
+                                break;
+                            default:
+                                return('something went wrong!');
+                                break;
+                        }
+                        break;
+                default:
+                    return('something went wrong!');
+                    break;
+            }
+        }
+
+        function game() {
+            const playerSelection = prompt('Rock paper or scissors?');
+            const computerSelection = computerPlay();
+            console.log(playRound(playerSelection, computerSelection));
+        }
+        
+        let counter = 0;
+        while (counter < 5)
+        {
+            game();
+            ++counter;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors</h1>
+    <h2>The Odin Project</h2>
+</body>
+</html>
