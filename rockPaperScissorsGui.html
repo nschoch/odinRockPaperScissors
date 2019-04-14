@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+    <title>Rock, Paper, Scissors (The Odin Project)</title>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors</h1>
+    <div id="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+        <div id="results">
+            <div id="message"></div>
+            <div id="wins"></div>
+            <div id="gameCount"></div>
+            <div id="gameStatus"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    function computerPlay() {
+        let result = Math.random() * 100;
+        if (result < 33) {
+            return 'rock';
+        }
+        else if (result < 66) {
+            return 'paper';
+        }
+        else {
+            return 'scissors';
+        }
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        finalPlayerSelection = playerSelection.toLowerCase();
+        switch(finalPlayerSelection) {
+            case 'rock':
+                switch(computerSelection) {
+                    case 'rock':
+                        return('Tie!');
+                        break;
+                    case 'paper':
+                        return('You lose!');
+                        break;
+                    case 'scissors':
+                        return('You win!');
+                        break;
+                    default:
+                        return('something went wrong!');
+                        break;
+                }
+                break;
+            case 'paper':
+                switch(computerSelection) {
+                    case 'rock':
+                        return('You win!');
+                        break;
+                    case 'paper':
+                        return('Tie!');
+                        break;
+                    case 'scissors':
+                        return('You lose!');
+                        break;
+                    default:
+                        return('something went wrong!');
+                        break;
+                }
+                break;
+            case 'scissors':
+                switch(computerSelection) {
+                        case 'rock':
+                            return('You lose!');
+                            break;
+                        case 'paper':
+                            return('You win!');
+                            break;
+                        case 'scissors':
+                            return('Tie!');
+                            break;
+                        default:
+                            return('something went wrong!');
+                            break;
+                    }
+                    break;
+            default:
+                return('something went wrong!');
+                break;
+        }
+    }
+
+    function game(choice) {
+        const playerSelection = choice ? choice : prompt('Rock paper or scissors?');
+        const computerSelection = computerPlay();
+        const outcome = playRound(playerSelection, computerSelection);
+
+        const messageField = document.querySelector('#message');
+        messageField.textContent = `You selected: ${playerSelection}. Computer selected: ${computerSelection}. `;
+
+        const gameCountField = document.querySelector('#gameCount');
+        const winsField = document.querySelector('#wins');
+        const gameStatusField = document.querySelector('#gameStatus');
+
+        let gameCount = gameCountField.textContent * 1;
+        let winCount = winsField.textContent * 1;
+        const maxGames = 5;
+        if (gameCount >= maxGames) {
+            gameCount = 0;
+            winCount = 0;
+        }
+
+        gameCount++;
+        gameCountField.textContent = gameCount;
+        messageField.textContent += outcome;
+
+        if ( outcome === 'You win!' ) {
+            winCount++;
+        }
+        
+        if ( gameCount >= 5 ) {
+            gameStatusField.textContent = "Game over!"
+        }
+        else {
+            gameStatusField.textContent = "Play again!"
+        }
+
+        winsField.textContent = winCount;
+
+    }
+
+    const buttons = document.querySelectorAll('button');
+
+    // we use the .forEach method to iterate through each button
+    buttons.forEach((button) => {
+        // and for each one we add a 'click' listener
+        button.addEventListener('click', (e) => {
+            game(button.id);
+        });
+    });
+
+
+</script>
+</doctype>
