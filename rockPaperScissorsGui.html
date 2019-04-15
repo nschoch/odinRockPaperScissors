@@ -118,7 +118,20 @@
         }
         
         if ( gameCount >= 5 ) {
-            gameStatusField.textContent = "Game over!"
+            let ratioCalc = winCount / gameCount;
+            if (ratioCalc > 0.5) {
+                gameStatusField.textContent = "You win!";
+            }
+            else if (ratioCalc === 0.5) {
+                gameStatusField.textContent = "Tie? Weird.";
+            }
+            else if (ratioCalc < 0.5) {
+                gameStatusField.textContent = "You lost. Too bad.";
+            }
+            else {
+                gameStatusField.textContent = "Something went wrong.";
+            }
+            gameStatusField.textContent += " Game over!"
         }
         else {
             gameStatusField.textContent = "Play again!"
